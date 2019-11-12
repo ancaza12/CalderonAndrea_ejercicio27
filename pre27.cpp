@@ -6,7 +6,7 @@ void integralE(float tf,float dt, int w);
 void integralI(float tf,float dt, int w);
 float ynE(float t, float dt, float w);
 float ynI(float t, float dt, float w);
-
+void error(float w);
 
 
 int main(){
@@ -22,6 +22,8 @@ int main(){
     std::cout <<"Error de 1"<< std::endl;
     integralE(4/w, 1/w, w);
     integralI(4/w, 1/w, w);
+    
+    error(w);
 	return 0;
 }
 
@@ -54,19 +56,29 @@ void integralI(float tf,float dt, int w){
     }
 }
 
-
-
-void error(float dt, float w){
+void error(float w){
     float teo=exp(-4);
-    float exper1= ;
-    float exper2=;
-    float exper3=;
+    float exper1= ynE(4/w, 0.1,w);
+    float exper2=ynE(4/w, 0.01,w);
+    float exper3=ynE(4/w, 1,w);
     
-    float error1= teo- exper1/teo;
-    float error2= teo - exper2/teo;
-    float error3= teo -exper3/teo;
-    std::cout <<"error1= "<< error1 << std::endl;
-    std::cout <<"error2= "<< error2 << std::endl;
-    std::cout <<"error3= "<< error3 << std::endl;
+    float error1E= teo- exper1/teo;
+    float error2E= teo - exper2/teo;
+    float error3E= teo -exper3/teo;
+    
+    float exper1I= ynI(4/w, 0.1,w);
+    float exper2I=ynI(4/w, 0.01,w);
+    float exper3I=ynI(4/w, 1,w);
+    
+    float error1I= teo- exper1I/teo;
+    float error2I= teo - exper2I/teo;
+    float error3I= teo -exper3I/teo;
+ 
+    std::cout <<"error1E= "<< error1E << std::endl;
+    std::cout <<"error2E= "<< error2E << std::endl;
+    std::cout <<"error3E= "<< error3E << std::endl;    
+    std::cout <<"error1I= "<< error1I << std::endl;
+    std::cout <<"error2I= "<< error2I << std::endl;
+    std::cout <<"error3I= "<< error3I << std::endl;
 
 }
